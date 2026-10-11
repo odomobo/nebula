@@ -31,12 +31,19 @@ Nothing queued; the user picks the next item from Later.
 
 8. **Viewer improvements.** Details to come from the user when this item is reached.
 
+9. **Upgrade the development tooling with known vulnerabilities** (`npm audit`: 11, 1 moderate and 10 high, all in
+   development tools, none in what runs in the session, the gateway or the browser): `@typescript-eslint` 7 → 8 (with
+   `braces`, `micromatch`, `fast-glob`, `globby` under it: a denial of service against the lint run) and `vite` ≤ 6.4.2
+   → 8 (with `esbuild`: path traversal and cross-site reads, only while the dev server runs). Both are breaking
+   upgrades: one tool family at a time (lint configs of every package; the viewer's build), `make check` and
+   `scripts/test-gateway.sh` after each. Not `npm audit fix --force`.
+
 ### Last
 
-9. **Install script, uninstall script and systemd unit.** Until then, real-PAM setup is manual (see
+10. **Install script, uninstall script and systemd unit.** Until then, real-PAM setup is manual (see
     `packages/session/README.md`). A `.deb` package possibly later.
 
-10. **Two-factor sign-in via PAM prompts** (lowest priority). Only makes sense once the core is verified sound and
+11. **Two-factor sign-in via PAM prompts** (lowest priority). Only makes sense once the core is verified sound and
     free of vulnerabilities.
 
 ### Needs verification on other hardware
